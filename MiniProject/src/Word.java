@@ -19,5 +19,5 @@ public class Word extends JLabel {
 		setText(word);
 		setSize(200, 50);
 		setForeground(Color.black);
-	}
+	} //test
 }
