@@ -14,6 +14,7 @@ public class MenuPanel extends BasePanel {
 
 	public MenuPanel(MainApp mp) {
 		super(/*이미지 경로*/);
+		setSize(MainApp.WIDTH, MainApp.HEIGHT);
 		main = mp; // 이전 패널 정보 저장
 		setBackground(Color.CYAN); // 삭제 예정 라인
 

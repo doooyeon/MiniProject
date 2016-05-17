@@ -6,21 +6,23 @@ public class MainApp extends JFrame {
 	private MainPanel mainPanel = new MainPanel(/*이미지 경로*/); // 메인 패널 베이스
 	private LoginPanel loginBox; // 로그인 소패널
 	private SignUpPanel signupBox; // 회원가입 소패널
-
-	public MenuPanel menuPanel = new MenuPanel(this); // 메뉴
+	public MenuPanel menuPanel = new MenuPanel(this); // 메뉴 패널
+	
+	public static int WIDTH = 1024;
+	public static int HEIGHT = 768;
 
 	public MainApp() {
 		// 창 설정
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Pass Me a Tube!");
-		setSize(1024, 768);
+		setSize(MainApp.WIDTH, MainApp.HEIGHT);
 		setContentPane(mainPanel);
-		setResizable(false); // 창 크기 조절불가 설정
+		//setResizable(false); // 창 크기 조절불가 설정
 		this.setLayout(null);
 
 		setLoginPanel(); // 로그인 패널 세팅
 		setSignUpPanel(); // 회원가입 패널 세팅
-		
+
 		setVisible(true);
 	}
 
@@ -32,8 +34,8 @@ public class MainApp extends JFrame {
 		loginBox.getLoginButton().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg) {
 				setContentPane(menuPanel);
-				revalidate();
-				//menuPanel.repaint();
+				//menuPanel.invalidate();
+				repaint();
 			}
 		});
 
@@ -68,13 +70,13 @@ public class MainApp extends JFrame {
 			public void actionPerformed(ActionEvent arg) {
 				//signupBox.setVisible(false);
 				setLoginPanel();
-				
+
 			}
 		});
 
 		// 패널 부착
 		mainPanel.add(signupBox);
-		signupBox. setVisible(false); // 안보이게 설정
+		signupBox.setVisible(false); // 안보이게 설정
 	}
 
 	public BasePanel getMainPanel() {
