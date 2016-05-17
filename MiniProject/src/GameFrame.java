@@ -17,6 +17,7 @@ public class GameFrame extends BasePanel {
 	private Vector<Word> list = new Vector<Word>(); // 임시
 	/* 리스트 내의 동물 최대 수 결정 */
 
+	// 단어 객체가 떠내려오는 
 	private static final int BOUND_X = 1017;
 	private static final int BOUND_Y = 740;
 	private static final int APPEARANCE_X1 = 643;

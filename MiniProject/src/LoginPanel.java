@@ -4,6 +4,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -21,6 +24,8 @@ public class LoginPanel extends BasePanel {
 	// 버튼
 	private JButton loginButton = new JButton("로그인");
 	private JButton signUpButton = new JButton("회원가입");
+	// 파일 읽기
+	private FileReader in = null; 
 
 	public LoginPanel() {
 		super(/*이미지 경로*/);
@@ -61,13 +66,20 @@ public class LoginPanel extends BasePanel {
 			}
 		});
 
-		
-
 		//System.out.println(IDFeild.getText());
 	}
 
+
 	public void initPanel() {
 
+	}
+	
+	public JTextField getID() {
+		return IDFeild;
+	}
+	
+	public JTextField getPassword() {
+		return passWordField;
 	}
 
 	public JButton getLoginButton() {

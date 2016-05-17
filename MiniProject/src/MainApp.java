@@ -33,19 +33,32 @@ public class MainApp extends JFrame {
 		// '로그인 버튼' 이벤트 설정
 		loginBox.getLoginButton().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg) {
-				setContentPane(menuPanel);
-				//menuPanel.invalidate();
-				repaint();
+				String id = loginBox.getID().getText().trim(); // 공백 제거 trim() 사용
+				String pw = loginBox.getPassword().getText().trim();
+				
+				if(id.equals("")) {
+					JOptionPane.showMessageDialog(mainPanel, "아이디를 입력하세요.", "Message", JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+				else if(pw.equals("")) {
+					JOptionPane.showMessageDialog(mainPanel, "비밀번호를 입력하세요.", "Message", JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+				else {
+					setContentPane(menuPanel);
+					// menuPanel.invalidate();
+					repaint();
+				}
 			}
 		});
 
 		// '회원가입 버튼' 이벤트 설정
 		loginBox.getSignUpButton().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg) {
-				loginBox.setVisible(false);
-				signupBox.setVisible(true);
-				//mainPanel.setComponentZOrder(loginBox, 0);
-				//loginBox.setFocusable(false);
+					loginBox.setVisible(false);
+					signupBox.setVisible(true);
+					mainPanel.setComponentZOrder(loginBox, 0);
+					//loginBox.setFocusable(false);
 			}
 		});
 
@@ -60,15 +73,35 @@ public class MainApp extends JFrame {
 		// '확인 버튼' 이벤트 설정
 		signupBox.getOkButton().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg) {
-				signupBox.setVisible(false);
-				loginBox.setVisible(true);
+				String id = signupBox.getID().getText().trim(); // 공백 제거 trim() 사용
+				String pw = signupBox.getPassword().getText().trim();
+				String pwc = signupBox.getCheckPassword().getText().trim();
+				
+				// 길이제한?
+				if(id.equals("")) {
+					JOptionPane.showMessageDialog(mainPanel, "아이디를 입력하세요.", "Message", JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+				else if(pw.equals("") || pwc.equals("")) {
+					JOptionPane.showMessageDialog(mainPanel, "비밀번호를 입력하세요.", "Message", JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+				else if(!pw.equals(pwc)) {
+					JOptionPane.showMessageDialog(mainPanel, "비밀번호가 일치하지 않습니다.", "Message", JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+				else {
+					signupBox.writeUserInfo();
+					signupBox.setVisible(false);
+					loginBox.setVisible(true);
+				}
 			}
 		});
 
 		// '취소 버튼' 이벤트 설정
 		signupBox.getCancelButton().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg) {
-				//signupBox.setVisible(false);
+				signupBox.setVisible(false);
 				setLoginPanel();
 
 			}
