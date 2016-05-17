@@ -30,7 +30,7 @@ public class GameFrame extends BasePanel {
 	
 
 	public GameFrame(/*Player player*/) { // 수정 필요
-		super(/*"images/gameBG.png"*/); // 배경 삽입
+		super("images/gameBG.png"); // 배경 삽입
 		this.player = new Player(new User()); // 수정 필요
 
 		setSize(MainApp.WIDTH, MainApp.HEIGHT); // 크기 설정
