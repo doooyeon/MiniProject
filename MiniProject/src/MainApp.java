@@ -42,9 +42,9 @@ public class MainApp extends JFrame {
 		// '회원가입 버튼' 이벤트 설정
 		loginBox.getSignUpButton().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg) {
-				//loginBox.setVisible(false);
+				loginBox.setVisible(false);
 				signupBox.setVisible(true);
-				mainPanel.setComponentZOrder(loginBox, 0);
+				//mainPanel.setComponentZOrder(loginBox, 0);
 				//loginBox.setFocusable(false);
 			}
 		});
