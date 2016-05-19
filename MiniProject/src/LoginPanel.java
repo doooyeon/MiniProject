@@ -4,9 +4,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.StringTokenizer;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -25,7 +27,7 @@ public class LoginPanel extends BasePanel {
 	private JButton loginButton = new JButton("로그인");
 	private JButton signUpButton = new JButton("회원가입");
 	// 파일 읽기
-	private FileReader in = null; 
+	private FileReader fin = null; 
 
 	public LoginPanel() {
 		super(/*이미지 경로*/);
@@ -68,10 +70,52 @@ public class LoginPanel extends BasePanel {
 
 		//System.out.println(IDFeild.getText());
 	}
-
-
+	
+	public boolean checkID(String inputID) {
+		try {
+			fin = new FileReader("C:\\Users\\TEST\\Desktop\\JP_ing\\UserInfo.txt"); // 경로 수정!
+			BufferedReader reader = new BufferedReader(fin);
+			
+			String userInfo = null;
+			
+			while((userInfo = reader.readLine()) != null) { // 한 줄 단위로 읽어옴
+				StringTokenizer ID = new StringTokenizer(userInfo, " "); // " " 기준으로 짜름
+				if(ID.nextToken().equals(inputID))
+					return true;
+			}
+			reader.close();
+		} catch (IOException e) {
+			System.out.println("입출력 오류");
+			System.exit(1);
+		}
+		return false;
+	}
+	
+	public boolean checkIdPw(String inputID, String inputPW) {
+		try {
+			fin = new FileReader("C:\\Users\\TEST\\Desktop\\JP_ing\\UserInfo.txt"); // 경로 수정!
+			BufferedReader reader = new BufferedReader(fin);
+			
+			String userInfo = null;
+			
+			while((userInfo = reader.readLine()) != null) { // 한 줄 단위로 읽어옴
+				StringTokenizer token = new StringTokenizer(userInfo, " "); // " " 기준으로 짜름
+				String userID = token.nextToken();
+				String userPW = token.nextToken();
+				if(userID.equals(inputID) && userPW.equals(inputPW))
+					return true;
+			}
+			reader.close();
+		} catch (IOException e) {
+			System.out.println("입출력 오류");
+			System.exit(1);
+		}
+		return false;
+	}
+	
 	public void initPanel() {
-
+		IDFeild = new JTextField();
+		passWordField = new JPasswordField();
 	}
 	
 	public JTextField getID() {

@@ -17,23 +17,11 @@ public class GameFrame extends BasePanel {
 	private Vector<Word> list = new Vector<Word>(); // 임시
 	/* 리스트 내의 동물 최대 수 결정 */
 
-	// 단어 객체가 떠내려오는 
-	private static final int BOUND_X = 1017;
-	private static final int BOUND_Y = 740;
-	private static final int APPEARANCE_X1 = 643;
-	private static final int APPEARANCE_X2 = 1017;
-	private static final int LIMIT_X1 = 26;
-	private static final int LIMIT_X2 = 515;
-	private static final int START_Y = 517;
-	private static final int END_Y = 358;
-	private static final double BOUND_SLOPE = 182.0 / 418.0;
-	
-
 	public GameFrame(/*Player player*/) { // 수정 필요
 		super("images/gameBG.png"); // 배경 삽입
 		this.player = new Player(new User()); // 수정 필요
 
-		setSize(MainApp.WIDTH, MainApp.HEIGHT); // 크기 설정
+		setSize(MainAppication.WIDTH, MainAppication.HEIGHT); // 크기 설정
 
 		// 입력창 생성, 배치
 		textInputBox = new InputPanel(780, 660, 200, 50);
@@ -74,30 +62,7 @@ public class GameFrame extends BasePanel {
 		 * 3. 단어 객체 contentPane에 add
 		 */
 
-		for (int i = 0; i < 50; i++) {
-			// 랜덤한 x좌표에 따른 y좌표 지정. (x, y)는 단어의 처음 출현 위치
-			int appearanceX = (int) (Math.random() * (APPEARANCE_X2 - APPEARANCE_X1) + APPEARANCE_X1);
-			int appearanceY = getAppearanceY(appearanceX);
-			System.out.println("(" + appearanceX + ", " + appearanceY + ")");
-			Word word = new Word("단어");
-			word.setLocation(appearanceX, appearanceY);
-			add(word);
-		}
-
 		//list.add(new Word("단어", 0, slope, appearanceX, appearanceY));
-	}
-
-	// 각 단어의 떠내려오는 기울기 구함
-	public double getSlope(int x) {
-		int limitX = (x - APPEARANCE_X1) * (LIMIT_X2 - LIMIT_X1) / (APPEARANCE_X2 - APPEARANCE_X1) + LIMIT_X1;
-		int slope = (START_Y - END_Y) / (x - limitX);
-		return slope;
-	}
-
-	// 단어가 출현할 x좌표에 따른 y좌표 반환
-	private int getAppearanceY(int x) {
-		int appearanceY = (int) (BOUND_SLOPE * (x - BOUND_X));
-		return appearanceY;
 	}
 
 	public void setTextInputBox() {

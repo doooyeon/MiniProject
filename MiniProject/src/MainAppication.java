@@ -2,7 +2,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class MainApp extends JFrame {
+public class MainAppication extends JFrame {
 	private MainPanel mainPanel = new MainPanel(/*이미지 경로*/); // 메인 패널 베이스
 	private LoginPanel loginBox; // 로그인 소패널
 	private SignUpPanel signupBox; // 회원가입 소패널
@@ -11,11 +11,11 @@ public class MainApp extends JFrame {
 	public static int WIDTH = 1024;
 	public static int HEIGHT = 768;
 
-	public MainApp() {
+	public MainAppication() {
 		// 창 설정
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Pass Me a Tube!");
-		setSize(MainApp.WIDTH, MainApp.HEIGHT);
+		setSize(MainAppication.WIDTH, MainAppication.HEIGHT);
 		setContentPane(mainPanel);
 		//setResizable(false); // 창 크기 조절불가 설정
 		this.setLayout(null);
@@ -36,19 +36,30 @@ public class MainApp extends JFrame {
 				String id = loginBox.getID().getText().trim(); // 공백 제거 trim() 사용
 				String pw = loginBox.getPassword().getText().trim();
 				
-				if(id.equals("")) {
-					JOptionPane.showMessageDialog(mainPanel, "아이디를 입력하세요.", "Message", JOptionPane.ERROR_MESSAGE);
-					return;
-				}
-				else if(pw.equals("")) {
-					JOptionPane.showMessageDialog(mainPanel, "비밀번호를 입력하세요.", "Message", JOptionPane.ERROR_MESSAGE);
-					return;
-				}
-				else {
-					setContentPane(menuPanel);
-					// menuPanel.invalidate();
-					repaint();
-				}
+//				if(!loginBox.checkID(id)) {
+//					JOptionPane.showMessageDialog(mainPanel, "존재하지 않는 아이디입니다.", "Message", JOptionPane.ERROR_MESSAGE);
+//					return;
+//				}
+//				else if(!loginBox.checkIdPw(id, pw)) {
+//					JOptionPane.showMessageDialog(mainPanel, "아이디와 비밀번호가 일치하지 않습니다.", "Message", JOptionPane.ERROR_MESSAGE);
+//					return;
+//				}
+//				else if(id.length()==0) {
+//					JOptionPane.showMessageDialog(mainPanel, "아이디를 입력하세요.", "Message", JOptionPane.ERROR_MESSAGE);
+//					return;
+//				}
+//				else if(pw.length()==0) {
+//					JOptionPane.showMessageDialog(mainPanel, "비밀번호를 입력하세요.", "Message", JOptionPane.ERROR_MESSAGE);
+//					return;
+//				}
+//				else {
+//					setContentPane(menuPanel);
+//					revalidate();
+//					repaint();
+//				}
+				setContentPane(menuPanel);
+				revalidate();
+				repaint();
 			}
 		});
 
@@ -57,7 +68,8 @@ public class MainApp extends JFrame {
 			public void actionPerformed(ActionEvent arg) {
 					loginBox.setVisible(false);
 					signupBox.setVisible(true);
-					mainPanel.setComponentZOrder(loginBox, 0);
+					setSignUpPanel();
+					//mainPanel.setComponentZOrder(loginBox, 0);
 					//loginBox.setFocusable(false);
 			}
 		});
@@ -78,11 +90,15 @@ public class MainApp extends JFrame {
 				String pwc = signupBox.getCheckPassword().getText().trim();
 				
 				// 길이제한?
-				if(id.equals("")) {
+				if(!signupBox.checkID(id)) {
+					JOptionPane.showMessageDialog(mainPanel, "이미 존재하는 아이디입니다.", "Message", JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+				else if(id.length()==0) {
 					JOptionPane.showMessageDialog(mainPanel, "아이디를 입력하세요.", "Message", JOptionPane.ERROR_MESSAGE);
 					return;
 				}
-				else if(pw.equals("") || pwc.equals("")) {
+				else if(pw.length()==0 || pwc.length()==0) {
 					JOptionPane.showMessageDialog(mainPanel, "비밀번호를 입력하세요.", "Message", JOptionPane.ERROR_MESSAGE);
 					return;
 				}
@@ -117,6 +133,6 @@ public class MainApp extends JFrame {
 	}
 
 	public static void main(String[] arg) {
-		new MainApp();
+		new MainAppication();
 	}
 }

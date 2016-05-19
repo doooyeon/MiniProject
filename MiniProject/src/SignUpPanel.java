@@ -2,10 +2,12 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -28,7 +30,7 @@ public class SignUpPanel extends BasePanel {
 	// 파일 쓰기
 	private FileWriter fout = null; 
 	// 파일 읽기
-	private FileReader in = null; 
+	private FileReader fin = null; 
 
 	public SignUpPanel() {
 		super(/*이미지 경로*/);
@@ -73,7 +75,7 @@ public class SignUpPanel extends BasePanel {
 	@SuppressWarnings("deprecation")
 	public void writeUserInfo() {
 		try {
-			fout = new FileWriter("C:\\Users\\TEST\\Desktop\\닭\\userInfo.txt", true); // 경로 수정!
+			fout = new FileWriter("C:\\Users\\TEST\\Desktop\\JP_ing\\UserInfo.txt", true); // 경로 수정!
 			fout.write(ID.getText() + " " + password.getText() + " " + 0 + " " + 1 + "\n"); // ID PW score stage
 			fout.close();
 		} catch (IOException e) {
@@ -81,21 +83,27 @@ public class SignUpPanel extends BasePanel {
 			System.exit(1);
 		}
 	}
-	
-//	public void checkID() {
-//		try {
-//			in = new FileReader("C:\\Users\\TEST\\Desktop\\닭\\userInfo.txt"); // 경로 수정!
-//
-//			int c;
-//			while((c = in.read()) != -1) {
-//				String id = 
-//			}
-//		} catch (IOException e) {
-//			System.out.println("입출력 오류");
-//			System.exit(1);
-//		}
-//	}
-	
+
+	public boolean checkID(String inputID) {
+		try {
+			fin = new FileReader("C:\\Users\\TEST\\Desktop\\JP_ing\\UserInfo.txt"); // 경로 수정!
+			BufferedReader reader = new BufferedReader(fin);
+			
+			String userInfo = null;
+			
+			while((userInfo = reader.readLine()) != null) { // 한 줄 단위로 읽어옴
+				StringTokenizer ID = new StringTokenizer(userInfo, " "); // " " 기준으로 짜름
+				if(ID.nextToken().equals(inputID))
+					return false;
+			}
+			reader.close();
+		} catch (IOException e) {
+			System.out.println("입출력 오류");
+			System.exit(1);
+		}
+		return true;
+	}
+
 	public JTextField getID() {
 		return ID;
 	}
