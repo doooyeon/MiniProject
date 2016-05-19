@@ -3,7 +3,7 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class MenuPanel extends BasePanel {
-	private MainApp main; // 메인패널로 돌아가기 위한 패널 레퍼런스
+	private MainAppication main; // 메인패널로 돌아가기 위한 패널 레퍼런스
 	// 패널
 	private GameFrame gamePanel = new GameFrame();
 	// 버튼
@@ -12,9 +12,9 @@ public class MenuPanel extends BasePanel {
 	private JButton btnRanking;
 	private JButton btnLogout = new JButton("로그아웃");
 
-	public MenuPanel(MainApp mp) {
+	public MenuPanel(MainAppication mp) {
 		super("images/menuBG.png");
-		setSize(MainApp.WIDTH, MainApp.HEIGHT);
+		setSize(MainAppication.WIDTH, MainAppication.HEIGHT);
 		main = mp; // 이전 패널 정보 저장
 		
 		ImageIcon gameIcon = new ImageIcon("images/게임하기.png");

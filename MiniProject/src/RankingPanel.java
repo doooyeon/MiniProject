@@ -8,7 +8,7 @@ public class RankingPanel extends JPanel {
 	//MainApp pane;
 
 
-	public RankingPanel(MainApp mf) {
+	public RankingPanel(MainAppication mf) {
 		//pane = mf;
 		setBackground(Color.lightGray);
 		this.setLayout(null);
@@ -78,6 +78,6 @@ public class RankingPanel extends JPanel {
 	}
 
 	public static void main(String[] args) {
-		new RankingPanel(new MainApp());
+		new RankingPanel(new MainAppication());
 	}
 }
